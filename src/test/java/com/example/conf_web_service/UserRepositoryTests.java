@@ -2,7 +2,7 @@ package com.example.conf_web_service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.conf_web_service.models.User;
+import com.example.conf_web_service.models.auth.User;
 import com.example.conf_web_service.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

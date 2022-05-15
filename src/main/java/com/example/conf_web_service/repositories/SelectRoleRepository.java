@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.conf_web_service.models.Roles;
-import com.example.conf_web_service.models.SelectRole;
+import com.example.conf_web_service.models.auth.Roles;
+import com.example.conf_web_service.models.auth.SelectRole;
 
 @Repository
 public interface SelectRoleRepository extends JpaRepository<SelectRole, Long> {

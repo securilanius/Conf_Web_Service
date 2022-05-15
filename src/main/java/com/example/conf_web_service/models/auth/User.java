@@ -1,9 +1,10 @@
-package com.example.conf_web_service.models;
+package com.example.conf_web_service.models.auth;
+
+import com.example.conf_web_service.models.auth.SelectRole;
 
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 

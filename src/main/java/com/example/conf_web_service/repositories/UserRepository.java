@@ -2,7 +2,7 @@ package com.example.conf_web_service.repositories;
 
 import java.util.Optional;
 
-import com.example.conf_web_service.models.User;
+import com.example.conf_web_service.models.auth.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

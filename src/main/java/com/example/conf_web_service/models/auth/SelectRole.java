@@ -1,4 +1,6 @@
-package com.example.conf_web_service.models;
+package com.example.conf_web_service.models.auth;
+
+import com.example.conf_web_service.models.auth.Roles;
 
 import javax.persistence.*;
 
