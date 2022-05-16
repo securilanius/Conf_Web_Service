@@ -30,6 +30,13 @@ import com.example.conf_web_service.repositories.UserRepository;
 import com.example.conf_web_service.security.jwt.JwtUtils;
 import com.example.conf_web_service.security.services.UserDetailsImpl;
 
+/**
+ * This class provides methods for initializing and authenticating users in the system.
+ *
+ *<p>In this example, I used the spring boot starter validation and jwt libraries to
+ * describe the logic of creating a new user, selecting roles, and processing requests</p>
+ */
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
@@ -49,6 +56,12 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
+    /**
+     * Authentication method that handles the url "/signin", checks the correctness of the submitted data
+     * and generate jwt token
+     * @param loginRequest
+     * @return
+     */
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -70,6 +83,12 @@ public class AuthController {
                 roles));
     }
 
+    /**
+     * Registration method that handles the url "/signup" checks whether there is a user
+     * in the database with the same email and username
+     * @param signUpRequest
+     * @return
+     */
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existByUsername(signUpRequest.getUsername())) {
@@ -92,6 +111,7 @@ public class AuthController {
         Set<String> strRoles = signUpRequest.getRole();
         Set<SelectRole> roles = new HashSet<>();
 
+        //Role selection
         if (strRoles == null) {
             SelectRole userRole = roleRepository.findByName(Roles.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -99,22 +119,21 @@ public class AuthController {
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
-                    case "admin":
+                    case "admin" -> {
                         SelectRole adminRole = roleRepository.findByName(Roles.ROLE_ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
-
-                        break;
-                    case "mod":
+                    }
+                    case "mod" -> {
                         SelectRole modRole = roleRepository.findByName(Roles.ROLE_MODERATOR)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
-
-                        break;
-                    default:
+                    }
+                    default -> {
                         SelectRole userRole = roleRepository.findByName(Roles.ROLE_USER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(userRole);
+                    }
                 }
             });
         }
